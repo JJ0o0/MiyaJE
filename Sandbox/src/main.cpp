@@ -2,7 +2,7 @@
 
 int main() {
     miya::Engine engine;
-    engine.Initialize();
+    if (!engine.Initialize()) return 1;
     engine.Run();
     engine.Shutdown();
 

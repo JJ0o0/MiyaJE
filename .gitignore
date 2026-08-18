@@ -1,5 +1,15 @@
-build/
 Scripts/
 
-.vscode/
+build/
+compile_commands.json
+
 .cache/
+.vscode/
+.idea/
+
+*.o
+*.a
+*.so
+*.out
+
+.DS_Store
