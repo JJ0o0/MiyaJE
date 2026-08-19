@@ -25,6 +25,8 @@ namespace miya {
             return false;
         }
 
+        m_window->SetInput(&m_input);
+
         m_running = true;
         return true;
     }
@@ -34,6 +36,8 @@ namespace miya {
 
         while (m_running && !m_window->ShouldClose()) {
             m_time.Tick();
+
+            m_input.BeginFrame();
             m_window->PollEvents();
 
             m_window->SwapBuffers();

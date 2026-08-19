@@ -5,6 +5,14 @@
 #include <string>
 
 namespace miya {
+    class Input;
+
+    enum class CursorMode {
+        Normal,
+        Hidden,
+        Locked
+    };
+
     struct WindowProperties {
         std::string Title = "MiyaJE Engine";
         uint32_t Width = 800;
@@ -20,6 +28,8 @@ namespace miya {
             bool Initialize(const WindowProperties& properties = {});
             void Destroy();
 
+            void SetInput(Input* input);
+
             void SwapBuffers() const;
             void PollEvents() const;
 
@@ -34,6 +44,9 @@ namespace miya {
             void ToggleVSync();
             void SetVSync(bool enabled);
             bool IsVSyncEnabled() const;
+
+            void SetCursorMode(CursorMode mode);
+            CursorMode GetCursorMode() const;
         private:
             struct Impl;
             std::unique_ptr<Impl> m_impl;
