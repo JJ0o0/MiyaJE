@@ -2,7 +2,8 @@ add_library(MiyaJEEngine STATIC
     "src/core/engine.cpp"
     "src/core/time.cpp"
     "src/core/logging/log.cpp"
-
+    "src/core/debug/debug_ui.cpp"
+    
     "src/input/input.cpp"
 
     "src/platform/window.cpp"
@@ -16,6 +17,7 @@ target_include_directories(MiyaJEEngine
 target_link_libraries(MiyaJEEngine
     PRIVATE
         glfw
+        imgui
 )
 
 target_compile_definitions(MiyaJEEngine

@@ -47,6 +47,8 @@ namespace miya {
 
             void SetCursorMode(CursorMode mode);
             CursorMode GetCursorMode() const;
+
+            void* GetNativeHandle() const;
         private:
             struct Impl;
             std::unique_ptr<Impl> m_impl;

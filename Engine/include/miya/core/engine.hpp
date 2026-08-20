@@ -1,7 +1,8 @@
 #pragma once
 
-#include <miya/core/time.hpp>
+#include <miya/core/debug/debug_ui.hpp>
 #include <miya/input/input.hpp>
+#include <miya/core/time.hpp>
 
 #include <memory>
 
@@ -22,5 +23,6 @@ namespace miya {
 
             Time m_time;
             Input m_input;
+            DebugUI m_debugUI;
     };
 }

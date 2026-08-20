@@ -281,6 +281,7 @@ namespace miya {
         }
 
         glfwTerminate();
+        Log::Info("Shutdown Window");
     }
 
     void Window::SetInput(Input* input) { m_impl->InputSystem = input; }
@@ -333,4 +334,9 @@ namespace miya {
     }
 
     CursorMode Window::GetCursorMode() const { return m_impl->Cursor; }
+
+    void* Window::GetNativeHandle() const {
+        MIYA_ASSERT(m_impl->Handle, "Cannot  get native handle without an initialized window");
+        return m_impl->Handle;
+    }
 }

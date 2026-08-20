@@ -27,6 +27,11 @@ namespace miya {
 
         m_window->SetInput(&m_input);
 
+        if (!m_debugUI.Initialize(*m_window)) {
+            Log::Error("Could not initialize debug UI");
+            return false;
+        }
+
         m_running = true;
         return true;
     }
@@ -40,6 +45,10 @@ namespace miya {
             m_input.BeginFrame();
             m_window->PollEvents();
 
+            m_debugUI.BeginFrame();
+                m_debugUI.Draw(*m_window, m_time, m_input);
+            m_debugUI.Render();
+
             m_window->SwapBuffers();
         }
     }
@@ -47,7 +56,8 @@ namespace miya {
     void Engine::Shutdown() {
         Log::Info("Shutting down...");
 
-        m_window.reset();
+        m_debugUI.Shutdown();
+        if (m_window) m_window->Destroy();
         m_running = false;
 
         Log::Info("Goodbye");
