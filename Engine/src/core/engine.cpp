@@ -1,4 +1,5 @@
 #include <miya/core/engine.hpp>
+#include <miya/core/io/filesystem.hpp>
 
 #include <miya/platform/window.hpp>
 
@@ -10,6 +11,11 @@ namespace miya {
 
     bool Engine::Initialize() {
         Log::Info("Initializing...");
+
+        if (!FileSystem::SetAssetRoot("Assets")) {
+            Log::Error("Couldn't initialize asset root");
+            return false;
+        }
 
         WindowProperties properties {
             .Title = "MiyaJE Engine",

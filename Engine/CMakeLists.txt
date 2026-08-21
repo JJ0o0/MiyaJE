@@ -3,6 +3,7 @@ add_library(MiyaJEEngine STATIC
     "src/core/time.cpp"
     "src/core/logging/log.cpp"
     "src/core/debug/debug_ui.cpp"
+    "src/core/io/filesystem.cpp"
     
     "src/input/input.cpp"
 
