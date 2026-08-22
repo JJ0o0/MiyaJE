@@ -3,6 +3,8 @@
 
 #include <miya/platform/window.hpp>
 
+#include "graphics/opengl/gl_context.hpp"
+
 #include <miya/core/logging/log.hpp>
 
 namespace miya {
@@ -31,6 +33,15 @@ namespace miya {
             return false;
         }
 
+        m_glContext = std::make_unique<OpenGL::GLContext>();
+        if (!m_glContext->Initialize()) {
+            Log::Error("Could not initialize OpenGL");
+
+            m_glContext.reset();
+            m_window.reset();
+            return false;
+        }
+
         m_window->SetInput(&m_input);
 
         if (!m_debugUI.Initialize(*m_window)) {
@@ -51,6 +62,8 @@ namespace miya {
             m_input.BeginFrame();
             m_window->PollEvents();
 
+            m_glContext->Clear(m_clearColor, true);
+
             m_debugUI.BeginFrame();
                 m_debugUI.Draw(*m_window, m_time, m_input);
             m_debugUI.Render();
@@ -63,6 +76,7 @@ namespace miya {
         Log::Info("Shutting down...");
 
         m_debugUI.Shutdown();
+        if (m_glContext) m_glContext->Destroy();
         if (m_window) m_window->Destroy();
         m_running = false;
 
